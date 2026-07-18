@@ -1,0 +1,28 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+  test:
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["npm", "run", "test"]
+
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "8080:80"

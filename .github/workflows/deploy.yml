@@ -1,0 +1,14 @@
+name: Test Project
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+
+      - name: Build Dev Image
+        run: docker build -t msayeddev/Designo-multi-page-website -f Dockerfile.dev .
+
+      - name: Run Tests
+        run: docker run msayeddev/Designo-multi-page-website npm run test -- --coverage
