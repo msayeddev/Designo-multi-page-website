@@ -11,4 +11,4 @@ jobs:
         run: docker build -t msayeddev/designo-multi-page-website -f dockerfile.dev .
 
       - name: Run Tests
-        run: docker run msayeddev/designo-multi-page-website npm run test -- --coverage
+        run: docker run msayeddev/designo-multi-page-website npm run test
