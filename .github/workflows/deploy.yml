@@ -12,3 +12,24 @@ jobs:
 
       - name: Run Tests
         run: docker run msayeddev/designo-multi-page-website npm run test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+
+      - name: Generate Deployment Package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: Designo-web-app
+          environment_name: Designo-web-app-env
+          region: eu-north-1
+          version_label: deploy-${{ github.sha }}
+          deployment_package: deploy.zip
