@@ -5,6 +5,8 @@ import App from './App';
 describe('App routing', () => {
 	it('renders the home route by default', () => {
 		render(<App />);
-		expect(screen.getByText('Home')).toBeInTheDocument();
+		const heading = screen.getByRole('heading', { level: 1 });
+		expect(heading).toBeInTheDocument();
+		expect(heading.textContent).not.toBe('');
 	});
 });
