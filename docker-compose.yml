@@ -2,7 +2,7 @@ services:
   dev:
     build:
       context: .
-      dockerfile: dockerfile.dev
+      dockerfile: Dockerfile.dev
     ports:
       - "5173:5173"
     volumes:
@@ -14,7 +14,7 @@ services:
   test:
     build:
       context: .
-      dockerfile: dockerfile.dev
+      dockerfile: Dockerfile.dev
     volumes:
       - .:/app
       - /app/node_modules
@@ -23,6 +23,6 @@ services:
   web:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "8080:80"
